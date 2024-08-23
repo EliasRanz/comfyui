@@ -5,7 +5,10 @@ FROM python:3
 RUN apt-get update && apt-get install git -y
 
 # Download ComfyUI and Configure
+WORKDIR "/opt"
+RUN git clone https://github.com/comfyanonymous/ComfyUI.git
 WORKDIR "/opt/ComfyUI"
+
 RUN pip install -r requirements.txt
 
 EXPOSE 8188
