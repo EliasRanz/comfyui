@@ -8,8 +8,22 @@ RUN apt-get update && apt-get install git -y
 WORKDIR "/opt"
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git
 WORKDIR "/opt/ComfyUI"
-RUN mkdir /opt/ComfyUI/output
+RUN pip install -r requirements.txt
 
+# Install Plugins
+WORKDIR /opt/ComfyUI/custom_nodes
+RUN git clone https://github.com/crystian/ComfyUI-Crystools.git
+WORKDIR /opt/ComfyUI/custom_nodes/ComfyUI-Crystools
+RUN pip install -r requirements.txt
+
+WORKDIR /opt/ComfyUI/custom_nodes
+RUN git clone https://github.com/jags111/efficiency-nodes-comfyui.git
+WORKDIR efficiency-nodes-comfyui
+RUN pip install -r requirements.txt
+
+WORKDIR /opt/ComfyUI/custom_nodes
+RUN git clone https://github.com/rgthree/rgthree-comfy.git
+WORKDIR rgthree-comfy
 RUN pip install -r requirements.txt
 
 EXPOSE 8188
